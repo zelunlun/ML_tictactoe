@@ -1,13 +1,20 @@
 import pandas as pd
+import numpy as np
 
-path = "./tic-tac-toe.txt"
-df = pd.read_csv(path,
-                 header=None,
-                 encoding="utf-8"
-)
+path = "./tic_tac_toe.csv"
+import pandas as pd
+# df = pd.read_csv("./tic-tac-toe.txt",delimiter=",")
+# df.to_csv("tic_tac_toe.csv", encoding='utf-8', index=False)
+
+df = pd.read_csv(path, header=0, names=['A','B','C','D','E','F','G','H','I','J'])
+print(df)
 # print(df.head())
+# for i in df.columns:
+#   print(df[i].value_counts())
+#   print()
 
-
+X = pd.get_dummies(df[['A','B','C','D','E','F','G','H','I','J']])
+print(X)
 df.replace('negative',0,inplace=True)   
 df.replace('positive',1,inplace=True)   
 
@@ -15,10 +22,9 @@ from sklearn import preprocessing
 
 # iloc 跟 loc 's different?
 X = df.iloc[:,0:9].values
-
 Y = df.iloc[:, [9]].values
 # print(X, end="\n")
-print(Y)
+# print(Y)
 
 from sklearn.model_selection import train_test_split
                                                         # 有 random_state和 shuffle參數可以使用
